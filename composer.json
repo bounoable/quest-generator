@@ -1,0 +1,26 @@
+{
+    "name": "bounoable/quest-generator",
+    "description": "A procedural quest generator written in PHP.",
+    "type": "library",
+    "require-dev": {
+        "phpspec/phpspec": "^4.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Saman Hosseini",
+            "email": "bounoable@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "symfony/yaml": "^4.0",
+        "doctrine/common": "^2.8",
+        "illuminate/container": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bounoable\\Quest\\": "src/"
+        }
+    }
+}
