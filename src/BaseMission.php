@@ -35,12 +35,4 @@ class BaseMission implements Mission
             'completed' => $this->isCompleted()
         ];
     }
-
-    /**
-     * Transform the mission into an array of mission data.
-     */
-    public function jsonSerialize(): array
-    {
-        return $this->toArray();
-    }
 }
