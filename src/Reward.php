@@ -10,7 +10,7 @@ interface Reward
     public function getType(): string;
 
     /**
-     * Transform the mission into an array of mission data.
+     * Get the reward data.
      */
-    public function toArray(): array;
+    public function getData(): array;
 }

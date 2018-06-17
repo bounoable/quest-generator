@@ -13,9 +13,4 @@ interface Mission
      * Determine if the mission has been completed.
      */
     public function isCompleted(): bool;
-
-    /**
-     * Transform the mission into an array of mission data.
-     */
-    public function toArray(): array;
 }

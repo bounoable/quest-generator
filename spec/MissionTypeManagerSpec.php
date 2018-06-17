@@ -18,11 +18,16 @@ class MissionTypeManagerSpec extends ObjectBehavior
     {
         $this->shouldThrow(Exception::class)->duringResolve('type-name');
         $this->shouldThrow(Exception::class)->duringResolve('type-name-closure');
+
         $this->register('type-name', $type);
+
         $this->register('type-name-closure', function () use ($type) {
             return $type->getWrappedObject();
         });
+
         $this->resolve('type-name')->shouldReturn($type);
         $this->resolve('type-name-closure')->shouldReturn($type);
+        $this->getTypeNames()->shouldContain('type-name');
+        $this->getTypeNames()->shouldContain('type-name-closure');
     }
 }

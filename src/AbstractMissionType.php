@@ -9,30 +9,49 @@ abstract class AbstractMissionType implements MissionType
     /**
      * Get the mission type name.
      */
-    public function getType(): string
+    public function getTypeName(): string
     {
-        if (!defined('static::TYPE')) {
-            $class = static::class;
-            throw new Exception("{$class}::TYPE is not defined.");
+        if (!defined('static::NAME')) {
+            throw new Exception(static::class . '::NAME is not defined.');
         }
 
-        return static::TYPE;
+        return static::NAME;
     }
 
     /**
-     * Get the description of a mission.
+     * Describe a mission.
      */
     public function describe(Mission $mission): string
     {
-        if ($mission->getType() !== $this->getType()) {
-            throw new Exception("Mission must be of type '{$this->getType()}'");
+        if ($mission->getType() !== $this->getTypeName()) {
+            throw new Exception("Mission must be of type '{$this->getTypeName()}'");
         }
 
         return $this->getDescription($mission);
     }
 
     /**
-     * Get the description of a mission.
+     * Describe a mission.
      */
     abstract protected function getDescription(Mission $mission): string;
+
+    /**
+     * Generate a mission.
+     */
+    abstract public function generate(): GeneratedMission;
+
+    /**
+     * Start a generated mission.
+     */
+    abstract public function start(GeneratedMission $mission): Mission;
+
+    /**
+     * Determine if a mission has been completed.
+     */
+    abstract public function check(Mission $mission): bool;
+
+    /**
+     * Complete a mission.
+     */
+    abstract public function complete(Mission $mission): void;
 }
