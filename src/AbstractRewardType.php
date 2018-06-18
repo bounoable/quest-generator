@@ -16,9 +16,6 @@ abstract class AbstractRewardType implements RewardType
         return static::NAME;
     }
 
-    /**
-     * Describe a reward.
-     */
     public function describe(Reward $reward): string
     {
         if ($reward->getType() !== $this->getTypeName()) {
@@ -28,18 +25,11 @@ abstract class AbstractRewardType implements RewardType
         return $this->getDescription($reward);
     }
 
-    /**
-     * Describe a reward.
-     */
     abstract protected function getDescription(Reward $reward): string;
 
-    /**
-     * Generate a reward.
-     */
     abstract public function generate(): GeneratedReward;
 
-    /**
-     * Apply a reward.
-     */
     abstract public function apply(Reward $reward): void;
+
+    abstract public function validateData(array $data): bool
 }

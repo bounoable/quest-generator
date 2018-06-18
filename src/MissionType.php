@@ -28,4 +28,9 @@ interface MissionType
      * Complete a mission.
      */
     public function complete(Mission $mission): void;
+
+    /**
+     * Validate mission data.
+     */
+    public function validateData(array $data): bool;
 }

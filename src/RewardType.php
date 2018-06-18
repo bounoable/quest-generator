@@ -18,4 +18,9 @@ interface RewardType
      * Apply a reward.
      */
     public function apply(Reward $reward): void;
+
+    /**
+     * Validate reward data.
+     */
+    public function validateData(array $data): bool;
 }

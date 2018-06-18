@@ -18,9 +18,6 @@ abstract class AbstractMissionType implements MissionType
         return static::NAME;
     }
 
-    /**
-     * Describe a mission.
-     */
     public function describe(Mission $mission): string
     {
         if ($mission->getType() !== $this->getTypeName()) {
@@ -30,28 +27,15 @@ abstract class AbstractMissionType implements MissionType
         return $this->getDescription($mission);
     }
 
-    /**
-     * Describe a mission.
-     */
     abstract protected function getDescription(Mission $mission): string;
 
-    /**
-     * Generate a mission.
-     */
     abstract public function generate(): GeneratedMission;
 
-    /**
-     * Start a generated mission.
-     */
     abstract public function start(GeneratedMission $mission): Mission;
 
-    /**
-     * Determine if a mission has been completed.
-     */
     abstract public function check(Mission $mission): bool;
 
-    /**
-     * Complete a mission.
-     */
     abstract public function complete(Mission $mission): void;
+
+    abstract public function validateData(array $data): bool;
 }

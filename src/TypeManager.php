@@ -23,7 +23,7 @@ abstract class TypeManager
             throw new Exception("Type '{$name}' has not been registered.");
         }
 
-        return $this->resolvers[$name]();
+        return $this->types[$name]();
     }
 
     /**
@@ -31,7 +31,7 @@ abstract class TypeManager
      */
     public function registered(string $name): bool
     {
-        return isset($this->resolvers[$name]);
+        return isset($this->types[$name]);
     }
 
     /**
@@ -47,7 +47,7 @@ abstract class TypeManager
             return $type;
         };
 
-        $this->resolvers[$name] = $resolver;
+        $this->types[$name] = $resolver;
     }
 
     /**
@@ -57,6 +57,6 @@ abstract class TypeManager
      */
     public function getTypeNames(): array
     {
-        return array_keys($this->resolvers);
+        return array_keys($this->types);
     }
 }
