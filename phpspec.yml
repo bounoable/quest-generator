@@ -1,7 +1,0 @@
-suites:
-  app:
-    psr4_prefix: Bounoable\Quest
-    namespace: Bounoable\Quest
-    src_path: src
-
-formatter.name: pretty
