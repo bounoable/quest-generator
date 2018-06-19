@@ -27,6 +27,11 @@ abstract class AbstractMissionType implements MissionType
         return $this->getDescription($mission);
     }
 
+    public function complete(Mission $mission): void
+    {
+        // ...
+    }
+
     abstract protected function getDescription(Mission $mission): string;
 
     abstract public function generate(): GeneratedMission;
@@ -34,8 +39,6 @@ abstract class AbstractMissionType implements MissionType
     abstract public function start(GeneratedMission $mission): Mission;
 
     abstract public function check(Mission $mission): bool;
-
-    abstract public function complete(Mission $mission): void;
 
     abstract public function validateData(array $data): bool;
 }
