@@ -7,6 +7,13 @@ use Bounoable\Quest\Integration\QuestIntegrator;
 class Manager
 {
     /**
+     * The mission type manager.
+     *
+     * @var MissionTypeManager
+     */
+    private $missionTypes;
+
+    /**
      * The reward type manager.
      *
      * @var RewardTypeManager
@@ -23,8 +30,9 @@ class Manager
     /**
      * Initialize the quest manager.
      */
-    public function __construct(RewardTypeManager $rewardTypes, QuestIntegrator $integrator)
+    public function __construct(MissionTypeManager $missionTypes, RewardTypeManager $rewardTypes, QuestIntegrator $integrator)
     {
+        $this->missionTypes = $missionTypes;
         $this->rewardTypes = $rewardTypes;
         $this->integrator = $integrator;
     }
@@ -44,7 +52,9 @@ class Manager
     {
         /** @var Mission $mission */
         foreach ($quest->getMissions() as $mission) {
-            if (!$mission->isCompleted()) {
+            $type = $this->missionTypes->resolve($mission->getType());
+
+            if (!$type->check($mission)) {
                 return false;
             }
         }
