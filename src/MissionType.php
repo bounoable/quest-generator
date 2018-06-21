@@ -12,7 +12,7 @@ interface MissionType
     /**
      * Start a generated mission.
      */
-    public function start(GeneratedMission $mission): void;
+    public function start(GeneratedMission $mission): Mission;
 
     /**
      * Describe a mission.
