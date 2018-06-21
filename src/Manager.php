@@ -40,18 +40,24 @@ class Manager
 
     /**
      * Register a mission type.
+     *
+     * @param  \Closure|MissionType
+     * @return void
      */
-    public function registerMissionType(MissionType $type): void
+    public function registerMissionType(string $name, $resolver): void
     {
-        $this->missionTypes->register($type);
+        $this->missionTypes->register($name, $resolver);
     }
 
     /**
      * Register a mission type.
+     *
+     * @param  \Closure|RewardType
+     * @return void
      */
-    public function registerRewardType(RewardType $type): void
+    public function registerRewardType(string $name, $resolver): void
     {
-        $this->rewardTypes->register($type);
+        $this->rewardTypes->register($name, $resolver);
     }
 
     /**
