@@ -108,7 +108,7 @@ class Manager
      */
     public function describeMission(Mission $mission): string
     {
-        return $this->missionTypes->resolve($mission)->describe($mission);
+        return $this->missionTypes->resolve($mission->getType())->describe($mission);
     }
 
     /**
