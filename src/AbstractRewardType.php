@@ -31,5 +31,5 @@ abstract class AbstractRewardType implements RewardType
 
     abstract public function apply(Reward $reward): void;
 
-    abstract public function validateData(array $data): bool
+    abstract public function validateData(array $data): bool;
 }
