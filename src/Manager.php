@@ -39,6 +39,22 @@ class Manager
     }
 
     /**
+     * Register a mission type.
+     */
+    public function registerMissionType(MissionType $type): void
+    {
+        $this->missionTypes->register($type);
+    }
+
+    /**
+     * Register a mission type.
+     */
+    public function registerRewardType(RewardType $type): void
+    {
+        $this->rewardTypes->register($type);
+    }
+
+    /**
      * Start a generated quest and return the created quest entity.
      */
     public function start(GeneratedQuest $quest): Quest
