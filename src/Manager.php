@@ -2,6 +2,7 @@
 
 namespace Bounoable\Quest;
 
+use Exception;
 use Bounoable\Quest\Integration\QuestIntegrator;
 
 class Manager
@@ -81,5 +82,40 @@ class Manager
             $type = $this->rewardTypes->resolve($reward->getType());
             $type->apply($reward);
         }
+    }
+
+    /**
+     * Describe a mission or reward.
+     *
+     * @param  Mission|Reward  $missionOrReward
+     * @return string
+     */
+    public function describe($missionOrReward): string
+    {
+        if ($missionOrReward instanceof Mission) {
+            return $this->describeMission($missionOrReward);
+        }
+
+        if ($missionOrReward instanceof Reward) {
+            return $this->describeReward($missionOrReward);
+        }
+
+        throw new Exception('Object must be of type ' . Mission::class . ' or ' . Reward::class . '.');
+    }
+
+    /**
+     * Describe a mission.
+     */
+    public function describeMission(Mission $mission): string
+    {
+        return $this->missionTypes->resolve($mission)->describe($mission);
+    }
+
+    /**
+     * Describe a reward.
+     */
+    public function describeReward(Reward $reward): string
+    {
+        return $this->rewardTypes->resolve($reward)->describe($reward);
     }
 }
