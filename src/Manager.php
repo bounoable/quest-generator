@@ -116,6 +116,6 @@ class Manager
      */
     public function describeReward(Reward $reward): string
     {
-        return $this->rewardTypes->resolve($reward)->describe($reward);
+        return $this->rewardTypes->resolve($reward->getType())->describe($reward);
     }
 }
