@@ -52,10 +52,17 @@ class Generator
      */
     public function generate(int $count = 1): array
     {
-        return new GeneratedQuest(
-            $this->generateMissions($count),
-            $this->generateRewards($this->config->getRewardsPerMission())
-        );
+        while ($count--) {
+            $missionCount = mt_rand(...$this->config->getMissionsPerQuest());
+            $rewardCount = mt_rand(...$this->config->getRewardsPerQuest());
+
+            $quests[] = new GeneratedQuest(
+                $this->generateMissions($missionCount),
+                $this->generateRewards($rewardCount)
+            );
+        }
+
+        return $quests ?? [];
     }
 
     /**
