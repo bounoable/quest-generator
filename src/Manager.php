@@ -49,7 +49,7 @@ class Manager
     /**
      * Determine if all missions of a quest have been completed.
      */
-    public function isCompleted(Quest $quest): bool
+    public function check(Quest $quest): bool
     {
         /** @var Mission $mission */
         foreach ($quest->getMissions() as $mission) {
