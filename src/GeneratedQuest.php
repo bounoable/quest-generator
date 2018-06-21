@@ -2,7 +2,7 @@
 
 namespace Bounoable\Quest;
 
-class GeneratedQuest extends GeneratedObject
+class GeneratedQuest extends GeneratedObject implements Quest
 {
     /**
      * The generated missions.
