@@ -2,6 +2,6 @@
 
 namespace Bounoable\Quest;
 
-class GeneratedMission extends GeneratedType
+class GeneratedMission extends GeneratedType implements Mission
 {
 }
