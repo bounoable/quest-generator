@@ -10,11 +10,6 @@ interface MissionType
     public function generate(): GeneratedMission;
 
     /**
-     * Start a generated mission.
-     */
-    public function start(GeneratedMission $mission): Mission;
-
-    /**
      * Describe a mission.
      */
     public function describe(Mission $mission): string;
@@ -23,11 +18,6 @@ interface MissionType
      * Determine if a mission has been completed.
      */
     public function check(Mission $mission): bool;
-
-    /**
-     * Complete a mission.
-     */
-    public function complete(Mission $mission): void;
 
     /**
      * Validate mission data.
