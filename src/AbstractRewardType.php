@@ -18,11 +18,16 @@ abstract class AbstractRewardType implements RewardType
 
     public function describe(Reward $reward): string
     {
+        $this->validateType($reward);
+
+        return $this->getDescription($reward);
+    }
+
+    protected function validateType(Reward $reward): void
+    {
         if ($reward->getType() !== $this->getTypeName()) {
             throw new Exception("Reward must be of type '{$this->getTypeName()}'");
         }
-
-        return $this->getDescription($reward);
     }
 
     abstract protected function getDescription(Reward $reward): string;

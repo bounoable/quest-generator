@@ -20,18 +20,30 @@ abstract class AbstractMissionType implements MissionType
 
     public function describe(Mission $mission): string
     {
+        $this->validateType($mission);
+
+        return $this->getDescription($mission);
+    }
+
+    protected function validateType(Mission $mission): void
+    {
         if ($mission->getType() !== $this->getTypeName()) {
             throw new Exception("Mission must be of type '{$this->getTypeName()}'");
         }
-
-        return $this->getDescription($mission);
     }
 
     abstract protected function getDescription(Mission $mission): string;
 
     abstract public function generate(): Mission;
 
-    abstract public function check(Mission $mission): bool;
+    public function check(Mission $mission): bool
+    {
+        $this->validateType($mission);
+
+        return $this->isCompleted($mission);
+    }
+
+    abstract protected function isCompleted(): bool;
 
     abstract public function validateData(array $data): bool;
 }
