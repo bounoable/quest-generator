@@ -43,7 +43,7 @@ abstract class AbstractMissionType implements MissionType
         return $this->isCompleted($mission);
     }
 
-    abstract protected function isCompleted(): bool;
+    abstract protected function isCompleted(Mission $mission): bool;
 
     abstract public function validateData(array $data): bool;
 }
