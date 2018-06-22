@@ -81,12 +81,18 @@ class GeneratedQuest extends GeneratedObject implements Quest
     public function toArray(): array
     {
         return [
-            'missions' => array_map(function (GeneratedMission $mission) {
-                return $mission->toArray();
+            'missions' => array_map(function (Mission $mission) {
+                return [
+                    'type' => $mission->getType(),
+                    'data' => $mission->getData(),
+                ];
             }, $this->getMissions()),
 
-            'rewards' => array_map(function (GeneratedReward $reward) {
-                return $reward->toArray();
+            'rewards' => array_map(function (Reward $reward) {
+                return [
+                    'type' => $reward->getType(),
+                    'data' => $reward->getData(),
+                ];
             }, $this->getRewards())
         ];
     }
