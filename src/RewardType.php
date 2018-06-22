@@ -7,7 +7,7 @@ interface RewardType
     /**
      * Generate a reward.
      */
-    public function generate(): GeneratedReward;
+    public function generate(): Reward;
 
     /**
      * Describe a reward.

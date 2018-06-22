@@ -7,7 +7,7 @@ interface MissionType
     /**
      * Generate a mission.
      */
-    public function generate(): GeneratedMission;
+    public function generate(): Mission;
 
     /**
      * Describe a mission.

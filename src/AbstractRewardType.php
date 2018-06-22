@@ -27,7 +27,7 @@ abstract class AbstractRewardType implements RewardType
 
     abstract protected function getDescription(Reward $reward): string;
 
-    abstract public function generate(): GeneratedReward;
+    abstract public function generate(): Reward;
 
     abstract public function apply(Reward $reward): void;
 

@@ -29,7 +29,7 @@ abstract class AbstractMissionType implements MissionType
 
     abstract protected function getDescription(Mission $mission): string;
 
-    abstract public function generate(): GeneratedMission;
+    abstract public function generate(): Mission;
 
     abstract public function check(Mission $mission): bool;
 
