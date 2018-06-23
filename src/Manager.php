@@ -8,6 +8,13 @@ use Bounoable\Quest\Integration\QuestIntegrator;
 class Manager
 {
     /**
+     * The quest generator.
+     *
+     * @var Generator
+     */
+    private $generator;
+
+    /**
      * The mission type manager.
      *
      * @var MissionTypeManager
@@ -31,11 +38,20 @@ class Manager
     /**
      * Initialize the quest manager.
      */
-    public function __construct(MissionTypeManager $missionTypes, RewardTypeManager $rewardTypes, QuestIntegrator $integrator)
+    public function __construct(Generator $generator, MissionTypeManager $missionTypes, RewardTypeManager $rewardTypes, QuestIntegrator $integrator)
     {
+        $this->generator = $generator;
         $this->missionTypes = $missionTypes;
         $this->rewardTypes = $rewardTypes;
         $this->integrator = $integrator;
+    }
+
+    /**
+     * Get the quest generator.
+     */
+    public function getGenerator(): Generator
+    {
+        return $this->generator;
     }
 
     /**
@@ -58,6 +74,14 @@ class Manager
     public function registerRewardType(string $name, $resolver): void
     {
         $this->rewardTypes->register($name, $resolver);
+    }
+
+    /**
+     * Generate quests.
+     */
+    public function generate(int $count = 1): array
+    {
+        return $this->generator->generate($count);
     }
 
     /**
