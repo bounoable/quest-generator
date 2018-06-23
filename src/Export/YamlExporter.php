@@ -3,6 +3,9 @@
 namespace Bounoable\Quest\Export;
 
 use Exception;
+use Bounoable\Quest\Quest;
+use Bounoable\Quest\Reward;
+use Bounoable\Quest\Mission;
 use Symfony\Component\Yaml\Yaml;
 use Bounoable\Quest\GeneratedQuest;
 use Bounoable\Quest\GeneratedReward;
@@ -41,9 +44,23 @@ class YamlExporter implements FileExporter
      *
      * @throws ExportException
      */
-    public function export(GeneratedQuest $quest, string $path): void
+    public function export(Quest $quest, string $path): void
     {
-        $contents = Yaml::dump($quest->toArray());
+        $contents = Yaml::dump([
+            'missions' => array_map(function (Mission $mission) {
+                return [
+                    'type' => $mission->getType(),
+                    'data' => $mission->getData(),
+                ];
+            }, $quest->getMissions()),
+
+            'rewards' => array_map(function (Reward $reward) {
+                return [
+                    'type' => $reward->getType(),
+                    'data' => $reward->getData(),
+                ];
+            }, $quest->getRewards())
+        ]);
 
         file_put_contents($path, $contents);
 
@@ -55,11 +72,11 @@ class YamlExporter implements FileExporter
     }
 
     /**
-     * Import a generated quest from a YAML file.
+     * Import a quest from a YAML file.
      *
      * @throws ImportException
      */
-    public function import(string $path): GeneratedQuest
+    public function import(string $path): Quest
     {
         if (!file_exists($path)) {
             throw new ImportException("File '{$path}' does not exist.");
@@ -144,7 +161,7 @@ class YamlExporter implements FileExporter
     /**
      * Recreate a generated quest from quest data.
      */
-    protected function createFromData(array $data): GeneratedQuest
+    protected function createFromData(array $data): Quest
     {
         $missions = [];
         $rewards = [];

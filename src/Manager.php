@@ -3,6 +3,8 @@
 namespace Bounoable\Quest;
 
 use Exception;
+use Bounoable\Quest\Export\FileExporter;
+use Bounoable\Quest\Export\ExportException;
 use Bounoable\Quest\Integration\QuestIntegrator;
 
 class Manager
@@ -13,6 +15,13 @@ class Manager
      * @var Generator
      */
     private $generator;
+
+    /**
+     * The quest exporter.
+     *
+     * @var FileExporter
+     */
+    private $exporter;
 
     /**
      * The mission type manager.
@@ -38,9 +47,10 @@ class Manager
     /**
      * Initialize the quest manager.
      */
-    public function __construct(Generator $generator, MissionTypeManager $missionTypes, RewardTypeManager $rewardTypes, QuestIntegrator $integrator)
+    public function __construct(Generator $generator, FileExporter $exporter, MissionTypeManager $missionTypes, RewardTypeManager $rewardTypes, QuestIntegrator $integrator)
     {
         $this->generator = $generator;
+        $this->exporter = $exporter;
         $this->missionTypes = $missionTypes;
         $this->rewardTypes = $rewardTypes;
         $this->integrator = $integrator;
@@ -52,6 +62,38 @@ class Manager
     public function getGenerator(): Generator
     {
         return $this->generator;
+    }
+
+    /**
+     * Get the quest exporter.
+     */
+    public function getExporter(): FileExporter
+    {
+        return $this->exporter;
+    }
+
+    /**
+     * Get the mission type manager.
+     */
+    public function getMissionTypeManager(): MissionTypeManager
+    {
+        return $this->missionTypes;
+    }
+
+    /**
+     * Get the reward type manager.
+     */
+    public function getRewardTypeManager(): RewardTypeManager
+    {
+        return $this->rewardTypes;
+    }
+
+    /**
+     * Get the quest integrator.
+     */
+    public function getIntegrator(): QuestIntegrator
+    {
+        return $this->integrator;
     }
 
     /**
@@ -82,6 +124,26 @@ class Manager
     public function generate(int $count = 1): array
     {
         return $this->generator->generate($count);
+    }
+
+    /**
+     * Export a quest to a given path.
+     *
+     * @throws ExportException
+     */
+    public function export(Quest $quest, string $path): void
+    {
+        $this->exporter->export($quest, $path);
+    }
+
+    /**
+     * Import a quest from a file.
+     *
+     * @throws ImportException
+     */
+    public function import(string $path): Quest
+    {
+        return $this->exporter->import($path);
     }
 
     /**

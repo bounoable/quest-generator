@@ -2,21 +2,21 @@
 
 namespace Bounoable\Quest\Export;
 
-use Bounoable\Quest\GeneratedQuest;
+use Bounoable\Quest\Quest;
 
 interface FileExporter
 {
     /**
-     * Export a generated quest to a given path.
+     * Export a quest to a given path.
      *
      * @throws ExportException
      */
-    public function export(GeneratedQuest $quest, string $path): void;
+    public function export(Quest $quest, string $path): void;
 
     /**
-     * Import a generated quest from a file.
+     * Import a quest from a file.
      *
      * @throws ImportException
      */
-    public function import(string $path): GeneratedQuest;
+    public function import(string $path): Quest;
 }
