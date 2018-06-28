@@ -30,11 +30,19 @@ class Generator
     /**
      * Initialize the quest generator.
      */
-    public function __construct(MissionTypeManager $missionTypes, RewardTypeManager $rewardTypes)
+    public function __construct(MissionTypeManager $missionTypes, RewardTypeManager $rewardTypes, ?GeneratorConfig $config = null)
     {
         $this->missionTypes = $missionTypes;
         $this->rewardTypes = $rewardTypes;
-        $this->config = new GeneratorConfig;
+        $this->config = $config ?: new GeneratorConfig;
+    }
+
+    /**
+     * Initialize the quest generator.
+     */
+    public static function make(): self
+    {
+        return new static(new MissionTypeManager, new RewardTypeManager);
     }
 
     /**
