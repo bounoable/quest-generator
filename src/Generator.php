@@ -79,7 +79,7 @@ class Generator
      * @param  int  $count
      * @return GeneratedMission[]
      */
-    protected function generateMissions(int $count): array
+    public function generateMissions(int $count): array
     {
         $missions = [];
 
@@ -93,7 +93,7 @@ class Generator
     /**
      * Generate a mission.
      */
-    protected function generateMission(): Mission
+    public function generateMission(): Mission
     {
         return $this->randomMissionType()->generate();
     }
@@ -129,7 +129,7 @@ class Generator
      * @param  int  $count
      * @return GeneratedReward[]
      */
-    protected function generateRewards(int $count): array
+    public function generateRewards(int $count): array
     {
         $rewards = [];
 
@@ -143,7 +143,7 @@ class Generator
     /**
      * Generate a reward.
      */
-    protected function generateReward(): GeneratedReward
+    public function generateReward(): GeneratedReward
     {
         return $this->randomRewardType()->generate();
     }
