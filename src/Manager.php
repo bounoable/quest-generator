@@ -97,6 +97,14 @@ class Manager
     }
 
     /**
+     * Set the quest integrator instance.
+     */
+    public function setIntegrator(?QuestIntegrator $integrator = null): void
+    {
+        $this->integrator = $integrator;
+    }
+
+    /**
      * Register a mission type.
      *
      * @param  \Closure|MissionType
