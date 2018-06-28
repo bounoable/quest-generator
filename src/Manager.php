@@ -40,14 +40,14 @@ class Manager
     /**
      * The quest integrator.
      *
-     * @var QuestIntegrator
+     * @var QuestIntegrator|null
      */
     private $integrator;
 
     /**
      * Initialize the quest manager.
      */
-    public function __construct(Generator $generator, FileExporter $exporter, MissionTypeManager $missionTypes, RewardTypeManager $rewardTypes, QuestIntegrator $integrator)
+    public function __construct(Generator $generator, FileExporter $exporter, MissionTypeManager $missionTypes, RewardTypeManager $rewardTypes, ?QuestIntegrator $integrator = null)
     {
         $this->generator = $generator;
         $this->exporter = $exporter;
@@ -91,7 +91,7 @@ class Manager
     /**
      * Get the quest integrator.
      */
-    public function getIntegrator(): QuestIntegrator
+    public function getIntegrator(): ?QuestIntegrator
     {
         return $this->integrator;
     }
@@ -151,7 +151,9 @@ class Manager
      */
     public function start(GeneratedQuest $quest): Quest
     {
-        return $this->integrator->start($quest);
+        if ($this->integrator) {
+            return $this->integrator->start($quest);
+        }
     }
 
     /**
@@ -177,7 +179,10 @@ class Manager
     public function complete(Quest $quest): void
     {
         $this->applyRewards($quest);
-        $this->integrator->complete($quest);
+
+        if ($this->integrator) {
+            $this->integrator->complete($quest);
+        }
     }
 
     /**
@@ -216,7 +221,9 @@ class Manager
      */
     public function describeMission(Mission $mission): string
     {
-        return $this->missionTypes->resolve($mission->getType())->describe($mission);
+        return $this->missionTypes
+            ->resolve($mission->getType())
+            ->describe($mission);
     }
 
     /**
@@ -224,6 +231,8 @@ class Manager
      */
     public function describeReward(Reward $reward): string
     {
-        return $this->rewardTypes->resolve($reward->getType())->describe($reward);
+        return $this->rewardTypes
+            ->resolve($reward->getType())
+            ->describe($reward);
     }
 }
