@@ -149,7 +149,7 @@ class Manager
     /**
      * Start a generated quest and return the created quest entity.
      */
-    public function start(GeneratedQuest $quest): Quest
+    public function start(Quest $quest): Quest
     {
         return $this->integrator->start($quest);
     }
