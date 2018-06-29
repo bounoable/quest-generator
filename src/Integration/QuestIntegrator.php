@@ -3,14 +3,13 @@
 namespace Bounoable\Quest\Integration;
 
 use Bounoable\Quest\Quest;
-use Bounoable\Quest\GeneratedQuest;
 
 interface QuestIntegrator
 {
     /**
-     * Create a quest entity from a generated quest.
+     * Start a quest and return the instance of the started quest.
      */
-    public function start(GeneratedQuest $generated): Quest;
+    public function start(Quest $quest): Quest;
 
     /**
      * Handle the completion of a quest.
